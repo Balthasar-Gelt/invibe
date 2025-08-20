@@ -35,7 +35,9 @@ class CategoryResource extends Resource
                 ->label(__('Názov'))
                 ->maxLength(50)
                 ->live()
-                ->afterStateUpdated(fn (Set $set, $state)  => $set('slug', Str::slug($state)))
+                ->afterStateUpdated(function (Set $set, $state) {
+                    $set('slug', Str::slug($state));
+                })
                 ->unique(Category::class, 'name', ignoreRecord: true, modifyRuleUsing: function ($rule) {
                     return $rule->where('deleted_at', null);
                 })
@@ -107,7 +109,9 @@ class CategoryResource extends Resource
                         }
                     }),
             ])
-            ->recordUrl(fn (Category $record): string => self::getUrl('view', ['record' => $record]));
+            ->recordUrl(function (Category $record): string {
+                return self::getUrl('view', ['record' => $record]);
+            });
     }
 
     public static function getEloquentQuery(): Builder

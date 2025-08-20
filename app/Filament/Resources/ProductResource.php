@@ -36,7 +36,9 @@ class ProductResource extends Resource
                 ->label(__('Názov'))
                 ->maxLength(50)
                 ->live()
-                ->afterStateUpdated(fn (Set $set, $state) => $set('slug', Str::slug($state)))
+                ->afterStateUpdated(function (Set $set, $state) {
+                    $set('slug', Str::slug($state));
+                })
                 ->unique(Product::class, 'name', ignoreRecord: true, modifyRuleUsing: function ($rule) {
                     return $rule->where('deleted_at', null);
                 })
@@ -140,7 +142,9 @@ class ProductResource extends Resource
                         }
                     }),
             ])
-            ->recordUrl(fn (Product $record): string => self::getUrl('view', ['record' => $record]));
+            ->recordUrl(function (Product $record): string {
+                return self::getUrl('view', ['record' => $record]);
+            });
     }
 
     public static function getEloquentQuery(): Builder
