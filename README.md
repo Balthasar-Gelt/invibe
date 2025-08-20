@@ -78,7 +78,7 @@ composer install
 php artisan key:generate
 php artisan migrate
 php artisan storage:link
-php artisan make:filament-user
+php artisan make:filament-user - generates a filament user
 ```
 
 </details>
