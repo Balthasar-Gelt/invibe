@@ -1,0 +1,20 @@
+models:
+  Product:
+    name: string:50
+    slug: string
+    SKU: string
+    price: unsignedInteger
+    description: longtext nullable
+    active: boolean default:false
+    deleted_at: softDeletes
+    relationships:
+      belongsToMany: Category
+
+  Category:
+    name: string:50
+    slug: string
+    description: longtext nullable
+    active: boolean default:false
+    deleted_at: softDeletes
+    relationships:
+      belongsToMany: Product
