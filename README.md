@@ -1,4 +1,4 @@
-# Project - Laravel Filament App (English)
+# Project - Laravel Filament App
 
 <details>
 <summary>📚 Technologies Used</summary>
