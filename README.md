@@ -1,61 +1,97 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Project - Laravel Filament App (English)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+<details>
+<summary>📚 Technologies Used</summary>
 
-## About Laravel
+* PHP 8.4
+* Laravel 12
+* Filament 3.3
+* [filament/spatie-laravel-media-library-plugin 3.3](https://filamentphp.com/plugins/filament-spatie-settings)
+* [laravel-shift/blueprint 2.12](https://blueprint.laravelshift.com/)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+</details>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+<details>
+<summary>🛠 Laravel Blueprint</summary>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Laravel Blueprint is used to **generate migrations and models** from the `draft.yaml` file in the root directory.
 
-## Learning Laravel
+### Usage
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+1. **Erase generated files**
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+```bash
+php artisan blueprint:erase
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Deletes all migrations, model classes, and factories.
 
-## Laravel Sponsors
+2. **Edit `draft.yaml`** as needed
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+3. **Re-generate files**
 
-### Premium Partners
+```bash
+php artisan blueprint:build
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+> Before running new migrations, rollback previous migrations first. Blueprint does not handle it automatically.
 
-## Contributing
+</details>
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+<details>
+<summary>🔗 Entity Relationships</summary>
 
-## Code of Conduct
+* **Product ↔ Category:** many-to-many
+* Both entities use `softDeletes`
+* Deleting an entity also deletes its pivot associations
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+</details>
 
-## Security Vulnerabilities
+<details>
+<summary>📊 Table Views</summary>
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+* Buttons: **Create**, **Edit**, **Delete (softDelete)**, **Restore**, **Hard Delete**
+* Click on row to view entity details
 
-## License
+### Validation
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+* `name` and `slug` must be unique (among non-softDeleted entities)
+* `name` max 50 characters
+* All fields except `description` are required
+* `active` default `false`
+* SoftDeleted entity cannot be restored if a new one exists with same `name` and `slug`
+
+### Images
+
+* Package used: Spatie
+* Each entity can have **only one image**
+
+</details>
+
+<details>
+<summary>🚀 Project Setup</summary>
+
+After cloning the repository, run:
+
+```bash
+composer install
+php artisan key:generate
+php artisan migrate
+php artisan storage:link
+php artisan make:filament-user
+```
+
+</details>
+
+<details>
+<summary>🌍 Localization</summary>
+
+Set `.env` file as follows:
+
+```
+APP_LOCALE=sk
+APP_FALLBACK_LOCALE=sk
+APP_FAKER_LOCALE=sk_SK
+```
+
+</details>
