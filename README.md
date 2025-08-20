@@ -86,6 +86,7 @@ php artisan make:filament-user - generates a filament user
 <details>
 <summary>🌍 Localization</summary>
 
+This project uses slovak localisation.
 Set `.env` file as follows:
 
 ```
