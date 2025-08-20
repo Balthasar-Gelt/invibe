@@ -48,18 +48,19 @@ php artisan blueprint:build
 </details>
 
 <details>
-<summary>📊 Table Views</summary>
+<summary>📊 Basic overview</summary>
 
-* Buttons: **Create**, **Edit**, **Delete (softDelete)**, **Restore**, **Hard Delete**
-* Click on row to view entity details
+* Actions: **Create**, **Edit**, **Delete (softDelete)**, **Restore**, **Hard Delete**
+* Click on row to view entity detail page
 
 ### Validation
 
 * `name` and `slug` must be unique (among non-softDeleted entities)
 * `name` max 50 characters
+* For the product entity SKU field must be unique also, non-softDelete rule applies here also.
 * All fields except `description` are required
 * `active` default `false`
-* SoftDeleted entity cannot be restored if a new one exists with same `name` and `slug`
+* SoftDeleted entity cannot be restored if one not-deleted entity exists with same `name` and `slug`
 
 ### Images
 
